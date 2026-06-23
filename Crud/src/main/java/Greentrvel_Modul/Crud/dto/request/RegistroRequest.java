@@ -35,4 +35,4 @@ public class RegistroRequest {
     @NotNull(message = "El rol es obligatorio")
     @Schema(description = "Rol del usuario", example = "ANFITRION")
     private Rol rol;
-}
+};

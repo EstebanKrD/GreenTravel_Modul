@@ -17,4 +17,4 @@ public class LoginRequest {
     @NotBlank(message = "La contraseña es obligatoria")
     @Schema(description = "Contraseña del usuario", example = "Password123!")
     private String password;
-}
+};

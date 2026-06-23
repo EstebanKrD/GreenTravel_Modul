@@ -25,4 +25,4 @@ public class AuthResponse {
 
     @Schema(description = "Rol del usuario autenticado", example = "ADMINISTRADOR")
     private String rol;
-}
+};
