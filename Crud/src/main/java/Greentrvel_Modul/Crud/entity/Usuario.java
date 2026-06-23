@@ -77,6 +77,11 @@ public class Usuario implements UserDetails{
     }
 
     @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public String getUsername() {
         return email;  // El "usuario" para Spring Security es el email
     }
