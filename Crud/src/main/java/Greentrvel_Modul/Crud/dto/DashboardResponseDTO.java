@@ -5,13 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * DTO que representa el resumen general del dashboard administrativo.
- * Contiene estadísticas de usuarios, reservas y servicios.
- *
- * Rama: feature/dashboard-dto
- * Commit: feat(dashboard): create dashboard response dto
- */
 @Data
 @Builder
 @NoArgsConstructor
