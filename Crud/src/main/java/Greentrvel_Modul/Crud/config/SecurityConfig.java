@@ -51,12 +51,19 @@ public class SecurityConfig {
          * Permite el acceso sin autenticación a los endpoints de registro e inicio de sesión.
          * Cualquier otra petición requerirá autenticación.
          */
-        http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/login", "/auth/register")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-        );
+      http.authorizeHttpRequests(auth -> auth
+        .requestMatchers(
+                "/auth/login",
+                "/auth/register",
+                "/swagger-ui/**",
+                "/swagger-ui.html",
+                "/api-docs/**",
+                "/v3/api-docs/**"
+        )
+        .permitAll()
+        .anyRequest()
+        .authenticated()
+);
 
         /**
          * Configura la aplicación para trabajar sin sesiones, utilizando JWT como mecanismo de autenticación.
