@@ -50,7 +50,7 @@ public class DashboardService {
         return reservaRepository.countReservasActivas();
     }
 
-    /
+    
     public Long getReservasCanceladas() {
         return reservaRepository.countReservasCanceladas();
     }
