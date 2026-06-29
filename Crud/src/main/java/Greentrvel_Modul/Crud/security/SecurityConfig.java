@@ -1,7 +1,6 @@
-package Greentrvel_Modul.Crud.config;
+package Greentrvel_Modul.Crud.security;
 
 
-import Greentrvel_Modul.Crud.filter.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

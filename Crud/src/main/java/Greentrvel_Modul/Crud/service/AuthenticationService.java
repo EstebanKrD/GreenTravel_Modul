@@ -1,8 +1,8 @@
 package Greentrvel_Modul.Crud.service;
 
-import Greentrvel_Modul.Crud.dto.request.LoginRequest;
-import Greentrvel_Modul.Crud.dto.request.RegistroRequest;
-import Greentrvel_Modul.Crud.dto.response.AuthResponse;
+import Greentrvel_Modul.Crud.dto.LoginRequest;
+import Greentrvel_Modul.Crud.dto.RegistroRequest;
+import Greentrvel_Modul.Crud.dto.AuthResponse;
 import Greentrvel_Modul.Crud.entity.Usuario;
 import Greentrvel_Modul.Crud.repository.UsuarioRepository;
 import Greentrvel_Modul.Crud.security.JwtService;

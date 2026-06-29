@@ -1,8 +1,8 @@
 package Greentrvel_Modul.Crud.controller;
 
-import Greentrvel_Modul.Crud.dto.request.LoginRequest;
-import Greentrvel_Modul.Crud.dto.request.RegistroRequest;
-import Greentrvel_Modul.Crud.dto.response.AuthResponse;
+import Greentrvel_Modul.Crud.dto.LoginRequest;
+import Greentrvel_Modul.Crud.dto.RegistroRequest;
+import Greentrvel_Modul.Crud.dto.AuthResponse;
 import Greentrvel_Modul.Crud.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;

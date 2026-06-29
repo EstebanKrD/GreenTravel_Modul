@@ -1,4 +1,4 @@
-package Greentrvel_Modul.Crud.dto.request;
+package Greentrvel_Modul.Crud.dto;
 
 import Greentrvel_Modul.Crud.entity.Usuario.Rol;
 import io.swagger.v3.oas.annotations.media.Schema;

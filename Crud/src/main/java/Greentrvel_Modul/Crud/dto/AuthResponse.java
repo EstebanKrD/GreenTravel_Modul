@@ -1,4 +1,4 @@
-package Greentrvel_Modul.Crud.dto.response;
+package Greentrvel_Modul.Crud.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
