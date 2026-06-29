@@ -36,6 +36,6 @@ import org.springframework.context.annotation.Configuration;
         bearerFormat = "JWT",
         in = SecuritySchemeIn.HEADER
 )
-public class SwaggerConfig {
+public class OpenApiConfig {
     // Toda la configuración se hace con las anotaciones de arriba
 }
