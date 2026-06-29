@@ -13,7 +13,6 @@ import java.io.ByteArrayOutputStream;
 
 @Service
 public class PdfReportService {
-
     private final DashboardService dashboardService;
 
     public PdfReportService(DashboardService dashboardService) {
