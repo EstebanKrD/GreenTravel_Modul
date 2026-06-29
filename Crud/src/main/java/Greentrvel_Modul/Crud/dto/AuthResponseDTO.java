@@ -1,4 +1,4 @@
-package Greentrvel_Modul.Crud.dto.response;
+package Greentrvel_Modul.Crud.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Respuesta de autenticación con el token JWT")
-public class AuthResponse {
+public class AuthResponseDTO {
 
     @Schema(description = "Token JWT para autorizar peticiones", example = "eyJhbGciOiJIUzI1NiJ9...")
     private String token;

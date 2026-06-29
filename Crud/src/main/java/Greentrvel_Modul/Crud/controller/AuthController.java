@@ -1,8 +1,8 @@
 package Greentrvel_Modul.Crud.controller;
 
-import Greentrvel_Modul.Crud.dto.request.LoginRequest;
-import Greentrvel_Modul.Crud.dto.request.RegistroRequest;
-import Greentrvel_Modul.Crud.dto.response.AuthResponse;
+import Greentrvel_Modul.Crud.dto.LoginRequestDTO;
+import Greentrvel_Modul.Crud.dto.RegisterRequestDTO;
+import Greentrvel_Modul.Crud.dto.AuthResponseDTO;
 import Greentrvel_Modul.Crud.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/auth")
-public class AuthenticationController {
+public class AuthController {
 
     /**
      * Servicio encargado de la lógica de autenticación y registro.
@@ -26,7 +26,7 @@ public class AuthenticationController {
     /**
      * Constructor encargado de inyectar el servicio de autenticación.
      */
-    public AuthenticationController(AuthenticationService authenticationService) {
+    public AuthController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
@@ -35,7 +35,7 @@ public class AuthenticationController {
      * Recibe los datos de registro, los valida y delega el proceso al servicio de autenticación.
      */
     @PostMapping("/register")
-    public AuthResponse register(@Valid @RequestBody RegistroRequest request) {
+    public AuthResponseDTO register(@Valid @RequestBody RegisterRequestDTO request) {
 
         return authenticationService.register(request);
 
@@ -46,7 +46,7 @@ public class AuthenticationController {
      * Recibe las credenciales de acceso, las valida y genera un token JWT para el usuario autenticado.
      */
     @PostMapping("/login")
-    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
+    public AuthResponseDTO login(@Valid @RequestBody LoginRequestDTO request) {
 
         return authenticationService.login(request);
 
