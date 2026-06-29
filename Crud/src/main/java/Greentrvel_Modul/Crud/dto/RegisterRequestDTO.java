@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "Datos requeridos para registrar un nuevo usuario")
-public class RegistroRequest {
+public class RegisterRequestDTO {
 
     @NotBlank(message = "El nombre es obligatorio")
     @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")

@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "Datos requeridos para iniciar sesión")
-public class LoginRequest {
+public class LoginRequestDTO {
 
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "El formato del email no es válido")

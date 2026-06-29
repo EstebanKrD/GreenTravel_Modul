@@ -1,8 +1,8 @@
 package Greentrvel_Modul.Crud.service;
 
-import Greentrvel_Modul.Crud.dto.LoginRequest;
-import Greentrvel_Modul.Crud.dto.RegistroRequest;
-import Greentrvel_Modul.Crud.dto.AuthResponse;
+import Greentrvel_Modul.Crud.dto.LoginRequestDTO;
+import Greentrvel_Modul.Crud.dto.RegisterRequestDTO;
+import Greentrvel_Modul.Crud.dto.AuthResponseDTO;
 import Greentrvel_Modul.Crud.entity.Usuario;
 import Greentrvel_Modul.Crud.repository.UsuarioRepository;
 import Greentrvel_Modul.Crud.security.JwtService;
@@ -26,7 +26,7 @@ public class AuthenticationService {
      * Registra un nuevo usuario en el sistema.
      * Verifica que el correo no exista, encripta la contraseña, almacena el usuario y genera un token JWT.
      */
-    public AuthResponse register(RegistroRequest request) {
+    public AuthResponseDTO register(RegisterRequestDTO request) {
 
         /**
          * Verifica si el correo electrónico ya se encuentra registrado.
@@ -60,7 +60,7 @@ public class AuthenticationService {
         /**
          * Retorna la información de autenticación.
          */
-        return AuthResponse.builder()
+        return AuthResponseDTO.builder()
                 .token(token)
                 .email(usuario.getEmail())
                 .rol(usuario.getRol().name())
@@ -72,7 +72,7 @@ public class AuthenticationService {
      * Verifica que el correo exista, valida la contraseña
      * y genera un token JWT para las peticiones autenticadas.
      */
-    public AuthResponse login(LoginRequest request) {
+    public AuthResponseDTO login(LoginRequestDTO request) {
 
         /**
          * Busca el usuario utilizando el correo electrónico proporcionado.
@@ -100,7 +100,7 @@ public class AuthenticationService {
         /**
           Retorna la información de autenticación junto con el token.
          */
-        return AuthResponse.builder()
+        return AuthResponseDTO.builder()
                 .token(token)
                 .email(usuario.getEmail())
                 .rol(usuario.getRol().name())
