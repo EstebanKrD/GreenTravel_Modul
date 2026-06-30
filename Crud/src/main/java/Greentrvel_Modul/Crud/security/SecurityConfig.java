@@ -84,13 +84,5 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /**
-     * Bean encargado de proporcionar un codificador de contraseñas utilizando el algoritmo BCrypt.
-     * Permite almacenar contraseñas de forma segura en la base de datos.
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
 }
