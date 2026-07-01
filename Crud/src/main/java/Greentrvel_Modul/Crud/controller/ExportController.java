@@ -2,6 +2,10 @@ package Greentrvel_Modul.Crud.controller;
 
 import Greentrvel_Modul.Crud.service.CsvReportService;
 import Greentrvel_Modul.Crud.service.PdfReportService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/export")
+@Tag(name = "Exportación de reportes", description = "Descarga de reportes del dashboard e IoT en formato PDF y CSV")
 public class ExportController {
 
     private final PdfReportService pdfReportService;
@@ -23,6 +28,12 @@ public class ExportController {
     }
 
     @GetMapping("/pdf/dashboard")
+    @Operation(
+            summary = "Exportar dashboard en PDF",
+            description = "Genera y descarga un archivo PDF con el resumen del dashboard administrativo."
+    )
+    @ApiResponse(responseCode = "200", description = "PDF generado correctamente")
+    @ApiResponse(responseCode = "401", description = "No autenticado")
     public ResponseEntity<byte[]> exportarDashboardPdf() {
 
         byte[] pdf = pdfReportService.generarDashboardPdf();
@@ -35,6 +46,12 @@ public class ExportController {
     }
 
     @GetMapping("/pdf/iot")
+    @Operation(
+            summary = "Exportar reporte IoT en PDF",
+            description = "Genera y descarga un archivo PDF con el reporte de consumo de recursos IoT (agua y energía)."
+    )
+    @ApiResponse(responseCode = "200", description = "PDF generado correctamente")
+    @ApiResponse(responseCode = "401", description = "No autenticado")
     public ResponseEntity<byte[]> exportarIotPdf() {
 
         byte[] pdf = pdfReportService.generarIotPdf();
@@ -47,6 +64,12 @@ public class ExportController {
     }
 
     @GetMapping("/csv/dashboard")
+    @Operation(
+            summary = "Exportar dashboard en CSV",
+            description = "Genera y descarga un archivo CSV con el resumen del dashboard administrativo."
+    )
+    @ApiResponse(responseCode = "200", description = "CSV generado correctamente")
+    @ApiResponse(responseCode = "401", description = "No autenticado")
     public ResponseEntity<byte[]> exportarDashboardCsv() {
 
         byte[] csv = csvReportService.generarDashboardCsv();
@@ -59,6 +82,12 @@ public class ExportController {
     }
 
     @GetMapping("/csv/iot")
+    @Operation(
+            summary = "Exportar reporte IoT en CSV",
+            description = "Genera y descarga un archivo CSV con el reporte de consumo de recursos IoT (agua y energía)."
+    )
+    @ApiResponse(responseCode = "200", description = "CSV generado correctamente")
+    @ApiResponse(responseCode = "401", description = "No autenticado")
     public ResponseEntity<byte[]> exportarIotCsv() {
 
         byte[] csv = csvReportService.generarIotCsv();
