@@ -3,78 +3,66 @@ package Greentrvel_Modul.Crud.service;
 import Greentrvel_Modul.Crud.dto.ConsumoAguaDTO;
 import Greentrvel_Modul.Crud.dto.ConsumoEnergiaDTO;
 import Greentrvel_Modul.Crud.dto.EstadisticaConsumoDTO;
+import Greentrvel_Modul.Crud.repository.LecturaSensorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Service
 public class IotReportService {
+
+    @Autowired
+    private LecturaSensorRepository lecturaSensorRepository;
 
     public IotReportService() {
     }
 
     // ==========================================
-    // 1. RESPONSABILIDAD: Consumo Total
+    // 1. RESPONSABILIDAD: Consumo Total (Agua y Energía)
     // ==========================================
-    public double calcularTotalAgua(List<ConsumoAguaDTO> lecturas) {
-        if (lecturas == null || lecturas.isEmpty()) return 0.0;
-        double total = 0.0;
-        for (ConsumoAguaDTO dto : lecturas) {
-            total += dto.getCantidadLitros();
-        }
-        return total;
+    public BigDecimal calcularTotalAgua(ConsumoAguaDTO dto) {
+        if (dto == null || dto.getConsumoTotal() == null) return BigDecimal.ZERO;
+        return dto.getConsumoTotal();
     }
 
-    public double calcularTotalEnergia(List<ConsumoEnergiaDTO> lecturas) {
-        if (lecturas == null || lecturas.isEmpty()) return 0.0;
-        double total = 0.0;
-        for (ConsumoEnergiaDTO dto : lecturas) {
-            total += dto.getCantidadKwh();
-        }
-        return total;
+    public BigDecimal calcularTotalEnergia(ConsumoEnergiaDTO dto) {
+        if (dto == null || dto.getConsumoTotal() == null) return BigDecimal.ZERO;
+        return dto.getConsumoTotal();
     }
 
     // ==========================================
     // 2, 3 y 4. RESPONSABILIDAD: Consumo Diario, Semanal y Mensual
     // ==========================================
-    public double obtenerConsumoDiarioAgua(List<ConsumoAguaDTO> lecturas, String fecha) {
-        double total = 0.0;
-        for (ConsumoAguaDTO dto : lecturas) {
-            if (dto.getFecha().equals(fecha)) total += dto.getCantidadLitros();
-        }
-        return total;
+    public BigDecimal obtenerConsumoDiarioAgua(ConsumoAguaDTO dto) {
+        if (dto == null || dto.getConsumoDiario() == null) return BigDecimal.ZERO;
+        return dto.getConsumoDiario();
     }
 
-    public double obtenerConsumoMensualAgua(List<ConsumoAguaDTO> lecturas, String mesAnio) {
-        double total = 0.0;
-        for (ConsumoAguaDTO dto : lecturas) {
-            if (dto.getFecha().startsWith(mesAnio)) total += dto.getCantidadLitros();
-        }
-        return total;
+    public BigDecimal obtenerConsumoMensualAgua(ConsumoAguaDTO dto) {
+        if (dto == null || dto.getConsumoMensual() == null) return BigDecimal.ZERO;
+        return dto.getConsumoMensual();
     }
 
-    public double obtenerConsumoSemanalAgua(List<ConsumoAguaDTO> lecturas, int numeroSemana) {
-        // Filtro lógico por rango de días (se completará con la persistencia)
-        return 0.0;
+    public BigDecimal obtenerConsumoSemanalAgua(ConsumoAguaDTO dto) {
+        if (dto == null || dto.getConsumoSemanal() == null) return BigDecimal.ZERO;
+        return dto.getConsumoSemanal();
     }
 
     // ==========================================
-    // 5, 6 y 7. RESPONSABILIDAD: Promedio, Máximo y Mínimo (Estadísticas)
+    // 5, 6 y 7. RESPONSABILIDAD: Estadísticas Integradas
     // ==========================================
-    public EstadisticaConsumoDTO generarEstadisticasAgua(List<ConsumoAguaDTO> lecturas) {
-        if (lecturas == null || lecturas.isEmpty()) {
-            return new EstadisticaConsumoDTO(0.0, 0.0, 0.0, 0.0);
-        }
-
-        double total = calcularTotalAgua(lecturas);
-        double promedio = total / lecturas.size();
-        double maximo = Double.MIN_VALUE;
-        double minimo = Double.MAX_VALUE;
-
-        for (ConsumoAguaDTO dto : lecturas) {
-            if (dto.getCantidadLitros() > maximo) maximo = dto.getCantidadLitros();
-            if (dto.getCantidadLitros() < minimo) minimo = dto.getCantidadLitros();
-        }
-
-        return new EstadisticaConsumoDTO(total, promedio, maximo, minimo);
+    public EstadisticaConsumoDTO generarEstadisticasAgua(ConsumoAguaDTO aguaDto, ConsumoEnergiaDTO energiaDto) {
+        // Creamos el objeto usando el Builder que tu compañero implementó con Lombok
+        return EstadisticaConsumoDTO.builder()
+                // Mapeo de datos de Agua si existen
+                .promedioAgua(aguaDto != null ? aguaDto.getConsumoDiario() : BigDecimal.ZERO)
+                .maxAgua(aguaDto != null ? aguaDto.getConsumoTotal() : BigDecimal.ZERO)
+                .minAgua(aguaDto != null ? aguaDto.getConsumoDiario() : BigDecimal.ZERO)
+                
+                // Mapeo de datos de Energía si existen
+                .promedioEnergia(energiaDto != null ? energiaDto.getConsumoDiario() : BigDecimal.ZERO)
+                .maxEnergia(energiaDto != null ? energiaDto.getConsumoTotal() : BigDecimal.ZERO)
+                .minEnergia(energiaDto != null ? energiaDto.getConsumoDiario() : BigDecimal.ZERO)
+                .build();
     }
 }
