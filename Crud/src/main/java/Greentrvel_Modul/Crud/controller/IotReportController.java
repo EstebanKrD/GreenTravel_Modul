@@ -4,8 +4,9 @@ import Greentrvel_Modul.Crud.dto.ConsumoAguaDTO;
 import Greentrvel_Modul.Crud.dto.ConsumoEnergiaDTO;
 import Greentrvel_Modul.Crud.dto.EstadisticaConsumoDTO;
 import Greentrvel_Modul.Crud.service.IotReportService;
-import org.springframework.web.bind.annotation.*;
-import java.math.BigDecimal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/iot-reports")
@@ -13,46 +14,31 @@ public class IotReportController {
 
     private final IotReportService iotReportService;
 
-    // Constructor tradicional para inyectar el servicio
     public IotReportController(IotReportService iotReportService) {
         this.iotReportService = iotReportService;
     }
 
-    // ==========================================
-    // 1. Endpoint para Estadísticas Integradas (Agua y Energía)
-    // ==========================================
-    @PostMapping("/estadisticas")
-    public EstadisticaConsumoDTO generarEstadisticas(@RequestBody ConsumoAguaDTO aguaDto) {
-        // Creamos un DTO vacío simulado de energía para cumplir con la firma del servicio de estadísticas
-        ConsumoEnergiaDTO energiaSimulado = ConsumoEnergiaDTO.builder()
-                .consumoTotal(BigDecimal.ZERO)
-                .consumoDiario(BigDecimal.ZERO)
-                .build();
-                
-        return iotReportService.generarEstadisticasAgua(aguaDto, energiaSimulado);
+    /**
+     * Reporte completo de consumo de agua.
+     */
+    @GetMapping("/agua")
+    public ConsumoAguaDTO obtenerReporteAgua() {
+        return iotReportService.obtenerReporteAgua();
     }
 
-    // ==========================================
-    // 2. Endpoint para Consumo Diario de Agua
-    // ==========================================
-    @PostMapping("/diario/agua")
-    public BigDecimal obtenerConsumoDiarioAgua(@RequestBody ConsumoAguaDTO dto) {
-        return iotReportService.obtenerConsumoDiarioAgua(dto);
+    /**
+     * Reporte completo de consumo de energía.
+     */
+    @GetMapping("/energia")
+    public ConsumoEnergiaDTO obtenerReporteEnergia() {
+        return iotReportService.obtenerReporteEnergia();
     }
 
-    // ==========================================
-    // 3. Endpoint para Consumo Mensual de Agua
-    // ==========================================
-    @PostMapping("/mensual/agua")
-    public BigDecimal obtenerConsumoMensualAgua(@RequestBody ConsumoAguaDTO dto) {
-        return iotReportService.obtenerConsumoMensualAgua(dto);
-    }
-
-    // ==========================================
-    // 4. Endpoint para Consumo Semanal de Agua
-    // ==========================================
-    @PostMapping("/semanal/agua")
-    public BigDecimal obtenerConsumoSemanalAgua(@RequestBody ConsumoAguaDTO dto) {
-        return iotReportService.obtenerConsumoSemanalAgua(dto);
+    /**
+     * Estadísticas generales de consumo.
+     */
+    @GetMapping("/estadisticas")
+    public EstadisticaConsumoDTO obtenerEstadisticas() {
+        return iotReportService.obtenerEstadisticas();
     }
 }
